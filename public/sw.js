@@ -1,8 +1,7 @@
-const CACHE_NAME = "pelayanan-desa-v1";
+const CACHE_NAME = "pelayanan-desa-v2";
 const OFFLINE_URL = "/~offline.html";
 
 const PRECACHE_ASSETS = [
-  "/",
   "/manifest.json",
   "/icons/icon-192x192.svg",
   "/icons/icon-512x512.svg",

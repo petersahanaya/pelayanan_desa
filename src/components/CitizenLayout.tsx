@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
   DropdownMenu,
@@ -33,22 +33,31 @@ export default function CitizenLayout({ children }: { children: React.ReactNode 
   const pathname = usePathname();
   const router = useRouter();
   const [user, setUser] = useState<UserData | null>(null);
+  const authChecked = useRef(false);
 
   useEffect(() => {
+    if (authChecked.current) return;
+    authChecked.current = true;
     fetch("/api/auth/me")
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) return null;
+        return res.json();
+      })
       .then((data) => {
-        if (data.user) {
+        if (data?.user) {
           setUser(data.user);
           if (data.user.role === "admin") {
             router.push("/admin");
           }
+        } else {
+          router.push("/login");
         }
       })
       .catch(() => {
         router.push("/login");
       });
-  }, [router]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleLogout = async () => {
     await fetch("/api/auth/logout", { method: "POST" });
