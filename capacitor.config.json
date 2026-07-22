@@ -1,0 +1,27 @@
+{
+  "appId": "com.desa.pelayanan",
+  "appName": "Pelayanan Desa",
+  "webDir": "out",
+  "server": {
+    "androidScheme": "https",
+    "cleartext": true,
+    "allowNavigation": ["*"]
+  },
+  "plugins": {
+    "SplashScreen": {
+      "launchAutoHide": true,
+      "launchShowDuration": 2000,
+      "backgroundColor": "#16a34a",
+      "androidScaleType": "CENTER_CROP",
+      "showSpinner": true,
+      "spinnerColor": "#ffffff"
+    },
+    "StatusBar": {
+      "style": "DARK",
+      "backgroundColor": "#16a34a"
+    }
+  },
+  "android": {
+    "allowMixedContent": true
+  }
+}

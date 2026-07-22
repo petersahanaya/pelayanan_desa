@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Struktur Capacitor
+Arsitektur
+┌─────────────────────────────────────────┐
+│  WEB (Development)                      │
+│  Next.js full-stack on :3000            │
+│  (SSR + API routes + proxy)             │
+└─────────────────────────────────────────┘
 
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+┌─────────────────────────────────────────┐
+│  MOBILE (Capacitor Android)             │
+│  Static HTML/CSS/JS in Android WebView  │
+│  + Express backend on :3001             │
+│  Connects via http://10.0.2.2:3001      │
+└─────────────────────────────────────────┘
+Cara Build Android APK
+1. Jalankan backend server:
+npm run server
+# Backend berjalan di http://0.0.0.0:3001
+2. Build APK:
+npm run cap:build
+# Atau manual:
+npm run cap:sync
+cd android && ./gradlew assembleDebug
+3. APK location:
+android/app/build/outputs/apk/debug/app-debug.apk
+Files Penting
+- server/index.ts - Standalone Express backend
+- src/components/CapacitorProvider.tsx - API URL rewriting for native
+- capacitor.config.json - Capacitor configuration
+- build-android.sh - Automated build script
+Konfigurasi Server
+Ubah IP backend di src/components/CapacitorProvider.tsx:
+// Android emulator: http://10.0.2.2:3001
+// Real device: http://192.168.x.x:3001
+const DEFAULT_API_BASE = "http://10.0.2.2:3001";
+NPM Scripts
+Script	Description
+npm run server	Jalankan Express backend
+npm run cap:build	Build static + sync Capacitor
+npm run cap:sync	Sync web assets ke Android
+npm run cap:open	Buka di Android Studio
+▣  Build · MiMo V2.5 Free · 12m 50s

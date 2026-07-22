@@ -1,65 +1,102 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import CitizenLayout from "@/components/CitizenLayout";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { Megaphone, FileText } from "lucide-react";
+
+interface Information {
+  id: string;
+  judul: string;
+  kategori: string;
+  ringkasan: string;
+  tanggal: string;
+}
+
+interface UserData {
+  nama: string;
+}
+
+export default function HomePage() {
+  const [informations, setInformations] = useState<Information[]>([]);
+  const [user, setUser] = useState<UserData | null>(null);
+
+  useEffect(() => {
+    fetch("/api/auth/me").then((r) => r.json()).then((d) => setUser(d.user));
+    fetch("/api/information?limit=5").then((r) => r.json()).then((d) => setInformations(d.informations || []));
+  }, []);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <CitizenLayout>
+      <div className="px-5 py-5 space-y-6">
+        {/* Greeting */}
+        <div className="bg-foreground text-background rounded-3xl p-5">
+          <p className="text-background/60 text-xs font-light tracking-wide uppercase mb-1">Selamat datang</p>
+          <h2 className="text-lg font-semibold">{user?.nama || "Warga"}!</h2>
+          <p className="text-background/60 text-sm mt-0.5 font-light">
+            Layanan desa dalam genggaman Anda
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        {/* Quick Actions */}
+        <div className="space-y-3">
+          <h3 className="text-xs font-medium text-muted-foreground uppercase tracking-wider">Akses Cepat</h3>
+          <div className="grid grid-cols-2 gap-3">
+            <Link href="/pengaduan">
+              <div className="ios-card-interactive p-5 flex flex-col items-center gap-3">
+                <div className="flex size-12 items-center justify-center rounded-2xl bg-destructive/8">
+                  <Megaphone className="size-6 text-destructive" />
+                </div>
+                <span className="text-[13px] font-medium text-center">Buat Pengaduan</span>
+              </div>
+            </Link>
+            <Link href="/pengajuan">
+              <div className="ios-card-interactive p-5 flex flex-col items-center gap-3">
+                <div className="flex size-12 items-center justify-center rounded-2xl bg-foreground/8">
+                  <FileText className="size-6 text-foreground" />
+                </div>
+                <span className="text-[13px] font-medium text-center">Ajukan Surat</span>
+              </div>
+            </Link>
+          </div>
         </div>
-      </main>
-    </div>
+
+        {/* Latest Information */}
+        <div className="space-y-3">
+          <div className="flex items-center justify-between">
+            <h3 className="text-xs font-medium text-muted-foreground uppercase tracking-wider">Informasi Terbaru</h3>
+            <Link href="/informasi" className="text-xs text-foreground font-medium active:scale-95 transition-transform">
+              Lihat Semua
+            </Link>
+          </div>
+
+          {informations.length === 0 ? (
+            <div className="ios-card py-10 text-center text-muted-foreground text-sm font-light">
+              Belum ada informasi
+            </div>
+          ) : (
+            <div className="space-y-3">
+              {informations.map((info) => (
+                <Link key={info.id} href={`/informasi?id=${info.id}`}>
+                  <div className="ios-card-interactive p-4 space-y-2">
+                    <div className="flex items-center gap-2">
+                      <span className={`inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-medium ${
+                        info.kategori === "Berita"
+                          ? "bg-foreground text-background"
+                          : "bg-muted text-muted-foreground"
+                      }`}>
+                        {info.kategori}
+                      </span>
+                    </div>
+                    <h4 className="font-medium text-[13px] line-clamp-1">{info.judul}</h4>
+                    <p className="text-xs text-muted-foreground font-light line-clamp-2">{info.ringkasan}</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    </CitizenLayout>
   );
 }

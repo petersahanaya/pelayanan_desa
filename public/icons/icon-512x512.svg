@@ -1,0 +1,44 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="512" height="512" rx="96" fill="#18181b"/>
+  
+  <!-- House body -->
+  <path d="M256 112L122 216V392C122 405.3 132.7 416 146 416H366C379.3 416 390 405.3 390 392V216L256 112Z" fill="#fafafa"/>
+  
+  <!-- Roof peak -->
+  <path d="M256 112L122 216H390L256 112Z" fill="#d4d4d8"/>
+  
+  <!-- Door -->
+  <rect x="216" y="296" width="80" height="120" rx="10" fill="#18181b"/>
+  <circle cx="280" cy="360" r="8" fill="#fafafa"/>
+  
+  <!-- Window left -->
+  <rect x="142" y="248" width="52" height="48" rx="6" fill="#18181b"/>
+  <line x1="168" y1="248" x2="168" y2="296" stroke="#3f3f46" stroke-width="3"/>
+  <line x1="142" y1="272" x2="194" y2="272" stroke="#3f3f46" stroke-width="3"/>
+  
+  <!-- Window right -->
+  <rect x="318" y="248" width="52" height="48" rx="6" fill="#18181b"/>
+  <line x1="344" y1="248" x2="344" y2="296" stroke="#3f3f46" stroke-width="3"/>
+  <line x1="318" y1="272" x2="370" y2="272" stroke="#3f3f46" stroke-width="3"/>
+  
+  <!-- Attic window -->
+  <circle cx="256" cy="176" r="18" fill="#18181b"/>
+  <line x1="256" y1="158" x2="256" y2="194" stroke="#3f3f46" stroke-width="2"/>
+  <line x1="238" y1="176" x2="274" y2="176" stroke="#3f3f46" stroke-width="2"/>
+  
+  <!-- Chimney -->
+  <rect x="320" y="128" width="32" height="72" rx="4" fill="#a1a1aa"/>
+  
+  <!-- Smoke -->
+  <circle cx="336" cy="108" r="10" fill="#71717a" opacity="0.6"/>
+  <circle cx="346" cy="88" r="8" fill="#71717a" opacity="0.4"/>
+  <circle cx="340" cy="68" r="5" fill="#71717a" opacity="0.2"/>
+  
+  <!-- Ground line -->
+  <line x1="100" y1="420" x2="412" y2="420" stroke="#27272a" stroke-width="4" stroke-linecap="round"/>
+  
+  <!-- Shield/checkmark -->
+  <circle cx="432" cy="92" r="56" fill="#22c55e"/>
+  <path d="M408 92L428 112L456 72" stroke="white" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

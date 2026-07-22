@@ -1,0 +1,77 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  nama      String
+  nik       String   @unique
+  alamat    String
+  username  String   @unique
+  password  String
+  role      String   @default("warga") // "admin" | "warga"
+  noHp      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  complaints Complaint[]
+  letters    Letter[]
+}
+
+model Complaint {
+  id           String   @id @default(cuid())
+  judul        String
+  kategori     String   // Kebersihan, Infrastruktur, Keamanan, Layanan Publik, Lainnya
+  lokasi       String
+  deskripsi    String
+  fotoUrl      String?
+  status       String   @default("Menunggu") // Menunggu, Diproses, Selesai, Ditolak
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  userId       String
+  user         User     @relation(fields: [userId], references: [id])
+}
+
+model Letter {
+  id           String   @id @default(cuid())
+  jenisSurat   String   // Surat Keterangan Domisili, Usaha, Pengantar Nikah, etc.
+  nik          String
+  namaLengkap  String
+  noHp         String
+  alamat       String
+  keperluan    String
+  keterangan   String?
+  dokumenUrl   String?
+  status       String   @default("Menunggu") // Menunggu, Diproses, Selesai, Ditolak
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  userId       String
+  user         User     @relation(fields: [userId], references: [id])
+}
+
+model Information {
+  id        String   @id @default(cuid())
+  judul     String
+  kategori  String   // Berita, Pengumuman
+  ringkasan String
+  konten    String
+  tanggal   DateTime @default(now())
+  gambarUrl String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model VillageSetting {
+  id           String @id @default("singleton")
+  namaDesa     String @default("Desa Sejahtera")
+  kepalaDesa   String @default("Bapak H. Suharto")
+  alamat       String @default("Jl. Utama No. 1, Desa Sejahtera")
+  telepon      String @default("(021) 1234-5678")
+  email        String @default("info@desasejahtera.go.id")
+  updatedAt    DateTime @updatedAt
+}

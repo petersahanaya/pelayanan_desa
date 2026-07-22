@@ -1,0 +1,31 @@
+<svg width="192" height="192" viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="192" height="192" rx="38" fill="#18181b"/>
+  
+  <!-- House body -->
+  <path d="M96 42L46 82V148C46 153 50 157 55 157H137C142 157 146 153 146 148V82L96 42Z" fill="#fafafa"/>
+  
+  <!-- Roof peak -->
+  <path d="M96 42L46 82H146L96 42Z" fill="#d4d4d8"/>
+  
+  <!-- Door -->
+  <rect x="80" y="110" width="32" height="47" rx="4" fill="#18181b"/>
+  <circle cx="106" cy="136" r="3" fill="#fafafa"/>
+  
+  <!-- Window left -->
+  <rect x="54" y="92" width="20" height="18" rx="2" fill="#18181b"/>
+  
+  <!-- Window right -->
+  <rect x="118" y="92" width="20" height="18" rx="2" fill="#18181b"/>
+  
+  <!-- Chimney -->
+  <rect x="120" y="48" width="12" height="28" rx="2" fill="#a1a1aa"/>
+  
+  <!-- Smoke -->
+  <circle cx="126" cy="40" r="4" fill="#71717a" opacity="0.6"/>
+  <circle cx="130" cy="32" r="3" fill="#71717a" opacity="0.4"/>
+  
+  <!-- Shield/checkmark -->
+  <circle cx="162" cy="36" r="22" fill="#22c55e"/>
+  <path d="M153 36L160 43L171 31" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

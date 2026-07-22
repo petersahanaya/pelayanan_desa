@@ -1,0 +1,24 @@
+<svg width="144" height="144" viewBox="0 0 144 144" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="144" height="144" rx="28" fill="#18181b"/>
+  
+  <!-- House body -->
+  <path d="M72 30L34 60V106C34 109.9 37.1 113 41 113H103C106.9 113 110 109.9 110 106V60L72 30Z" fill="#fafafa"/>
+  
+  <!-- Roof peak -->
+  <path d="M72 30L34 60H110L72 30Z" fill="#d4d4d8"/>
+  
+  <!-- Door -->
+  <rect x="58" y="80" width="28" height="33" rx="3" fill="#18181b"/>
+  <circle cx="80" cy="98" r="2.5" fill="#fafafa"/>
+  
+  <!-- Window left -->
+  <rect x="40" y="68" width="14" height="14" rx="2" fill="#18181b"/>
+  
+  <!-- Window right -->
+  <rect x="90" y="68" width="14" height="14" rx="2" fill="#18181b"/>
+  
+  <!-- Shield/checkmark -->
+  <circle cx="114" cy="28" r="16" fill="#22c55e"/>
+  <path d="M107 28L113 34L121 25" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

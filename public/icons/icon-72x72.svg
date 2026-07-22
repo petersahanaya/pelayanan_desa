@@ -1,0 +1,20 @@
+<svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="72" height="72" rx="16" fill="#18181b"/>
+  
+  <!-- House body -->
+  <path d="M36 18L18 32V54C18 56.2 19.8 58 22 58H50C52.2 58 54 56.2 54 54V32L36 18Z" fill="#fafafa"/>
+  
+  <!-- Roof peak -->
+  <path d="M36 18L18 32H54L36 18Z" fill="#d4d4d8"/>
+  
+  <!-- Door -->
+  <rect x="30" y="42" width="12" height="16" rx="2" fill="#18181b"/>
+  
+  <!-- Window -->
+  <rect x="42" y="36" width="8" height="8" rx="1" fill="#18181b"/>
+  
+  <!-- Shield/checkmark -->
+  <circle cx="58" cy="14" r="9" fill="#22c55e"/>
+  <path d="M54 14L57 17L62 11" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
